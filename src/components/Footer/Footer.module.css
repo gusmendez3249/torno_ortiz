@@ -1,0 +1,566 @@
+/* Footer.module.css - Versión Mejorada */
+
+/* Reset específico para el footer */
+.footer * {
+  box-sizing: border-box;
+}
+
+/* Footer Principal con efectos */
+.footer {
+  background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+  color: #ffffff !important;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+  margin: 0 !important;
+  margin-top: auto !important;
+  width: 100vw !important;
+  min-width: 100% !important;
+  box-sizing: border-box !important;
+  position: relative;
+  z-index: 1;
+  clear: both;
+  overflow: hidden;
+  left: 0;
+  right: 0;
+}
+
+/* Efectos de fondo */
+.backgroundEffects {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.gradientOrb1,
+.gradientOrb2,
+.gradientOrb3 {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.2;
+  animation: float 8s ease-in-out infinite;
+}
+
+.gradientOrb1 {
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, #3b82f6, transparent);
+  top: -150px;
+  left: -150px;
+  animation-delay: 0s;
+}
+
+.gradientOrb2 {
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, #8b5cf6, transparent);
+  top: 50%;
+  right: -100px;
+  animation-delay: 3s;
+}
+
+.gradientOrb3 {
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, #06b6d4, transparent);
+  bottom: -125px;
+  left: 50%;
+  animation-delay: 6s;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-15px) rotate(120deg); }
+  66% { transform: translateY(-5px) rotate(240deg); }
+}
+
+.footerContainer {
+  max-width: none !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 2rem !important;  /* Menos padding izquierdo */
+  position: relative;
+  z-index: 2;
+}
+
+.footerContent {
+  display: grid !important;
+  grid-template-columns: 450px 1fr !important;
+  gap: 6rem !important;
+  padding: 4rem 2rem 2.5rem !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  align-items: start !important;
+  max-width: 1400px;
+  margin: 0 auto;
+  justify-self: start;
+}
+
+/* Sección Logo Mejorada */
+.footerLogoSection {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.footerLogo {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+
+.logoIcon {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+  transition: all 0.3s ease;
+}
+
+.logoIcon:hover {
+  box-shadow: 0 15px 40px rgba(59, 130, 246, 0.5);
+  transform: translateY(-2px);
+}
+
+.logoText {
+  display: flex;
+  flex-direction: column;
+}
+
+.logoMain {
+  font-size: 1.8rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+
+.logoSub {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 500;
+}
+
+/* Tarjeta de descripción */
+.descriptionCard {
+  padding: 25px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.descriptionCard:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(59, 130, 246, 0.3);
+  transform: translateY(-2px);
+}
+
+.descriptionIcon {
+  color: #3b82f6;
+  font-size: 1.5rem;
+  min-width: 24px;
+}
+
+.footerDescription {
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.6;
+  font-size: 1rem;
+  margin: 0;
+  font-weight: 500;
+}
+
+/* Sección Links Mejorada */
+.footerLinks {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5rem;
+  align-items: start;
+}
+
+.footerColumn {
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease;
+}
+
+.footerColumn:hover {
+  transform: translateY(-3px);
+}
+
+.footerTitle {
+  color: #ffffff;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  padding-bottom: 0.75rem;
+}
+
+.titleIcon {
+  font-size: 1.1rem;
+}
+
+.footerTitle::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 3px;
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.footerColumn:hover .footerTitle::after {
+  width: 60px;
+}
+
+/* Navegación mejorada */
+.footerNav {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.footerNav li {
+  margin: 0;
+}
+
+.footerLink {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 12px 16px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.footerLink::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.footerLink:hover::before {
+  left: 100%;
+}
+
+.footerLink:hover {
+  color: #ffffff;
+  background: rgba(59, 130, 246, 0.15);
+  transform: translateX(5px);
+}
+
+.linkIcon {
+  color: #3b82f6;
+  font-size: 0.9rem;
+  transition: transform 0.3s ease;
+}
+
+.footerLink:hover .linkIcon {
+  transform: scale(1.1);
+}
+
+/* Información Legal */
+.legalCard {
+    padding: 25px 30px; /* Ya tienes un buen padding horizontal */
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    width: 100%;
+    min-height: 140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.legalCard:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(59, 130, 246, 0.3);
+}
+
+.legalInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    /* CAMBIO CLAVE: Alinea el texto a la izquierda para que ocupe todo el ancho disponible */
+    text-align: left; /* Esto hará que el texto fluya de izquierda a derecha */
+    /* Si quisieras justificarlo (bordes rectos a ambos lados), usarías: text-align: justify; */
+}
+
+.legalText {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1rem;
+    line-height: 1.7;
+    margin: 0;
+    font-weight: 500;
+    /* CAMBIO CLAVE: Evita que el texto salte a otra línea si cabe en una */
+    white-space: nowrap; /* Asegura que el RFC y otras líneas cortas no se rompan */
+    /* Si tienes texto muy largo en otras .legalText que SÍ quieres que salten,
+       tendrías que crear una clase específica para el RFC, ej. .legalText--nowrap */
+}
+/* Información de Contacto */
+.contactInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.contactItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  padding: 18px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.contactItem:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(59, 130, 246, 0.3);
+  transform: translateY(-2px);
+}
+
+.contactIconWrapper {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  min-width: 40px;
+}
+
+.contactIconWrapper:hover {
+  background: linear-gradient(135deg, #1d4ed8, #3b82f6);
+}
+
+.contactText {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.contactText span {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.9rem;
+  line-height: 1.4;
+  font-weight: 500;
+}
+
+.contactEmail {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* Footer Bottom */
+.footerBottom {
+  padding: 2rem 1rem;
+  width: 100%;
+}
+
+.footerBottomContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  max-width: 1700px;
+  margin: 0 auto;
+}
+
+.copyright {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.statusBadge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  border-radius: 20px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.statusDot {
+  width: 8px;
+  height: 8px;
+  background: #22c55e;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { 
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 0.5;
+    transform: scale(1.2);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .footerContainer {
+    padding: 0 1rem !important;
+  }
+  
+  .footerContent {
+    grid-template-columns: 1fr !important;
+    gap: 2.5rem !important;
+    padding: 2rem 1rem 1.5rem !important;
+  }
+
+  .footerLinks {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+
+  .footerLogoSection {
+    text-align: center;
+  }
+
+  .footerLogo {
+    justify-content: center;
+  }
+
+  .footerDescription {
+    text-align: center;
+  }
+
+  .footerColumn {
+    text-align: center;
+  }
+
+  .footerTitle::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .footerLink:hover {
+    transform: none;
+  }
+
+  .footerBottom {
+    padding: 2rem 1rem;
+  }
+
+  .footerBottomContent {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .contactItem {
+    justify-content: center;
+    text-align: left;
+  }
+
+  .logoMain {
+    font-size: 1.5rem;
+  }
+
+  .logoIcon {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+@media (max-width: 480px) {
+  .footerContainer {
+    padding: 0 1rem !important;
+  }
+
+  .footerContent {
+    padding: 1.5rem 1rem 1rem !important;
+  }
+
+  .footerLinks {
+    gap: 1.5rem !important;
+  }
+
+  .contactItem {
+    align-items: center;
+  }
+
+  .descriptionCard {
+    padding: 20px;
+    text-align: center;
+  }
+
+  .footerBottom {
+    padding: 1.5rem 1rem;
+  }
+}
+
+/* Accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+  .footerLink,
+  .logoIcon,
+  .footerTitle::after,
+  .gradientOrb1,
+  .gradientOrb2,
+  .gradientOrb3,
+  .statusDot {
+    animation: none;
+    transition: none;
+  }
+  
+  .footerColumn:hover,
+  .contactItem:hover,
+  .legalCard:hover,
+  .descriptionCard:hover {
+    transform: none;
+  }
+}
