@@ -58,23 +58,22 @@ function CotizationForm({
     message: ''
   });
 
-  // Configuración de EmailJS (reemplaza con tus credenciales)
+  // Configuración de EmailJS
   const EMAILJS_CONFIG = {
-    serviceId: 'service_o2oercf', // Reemplaza con tu Service ID
-    templateId: 'template_bzh8iae', // Reemplaza con tu Template ID
-    userId: '3Ni09l-UA4BpRgCEH' // Reemplaza con tu User ID
+    serviceId: 'service_o2oercf',
+    templateId: 'template_2mn0g4p', // Template ID actualizado que tienes configurado
+    userId: '3Ni09l-UA4BpRgCEH'
   };
 
   const showAlert = (type: 'success' | 'error', message: string) => {
     setAlert({ show: true, type, message });
-    // La alerta se ocultará automáticamente después de 5 segundos
     setTimeout(() => {
-      setAlert({ show: false, type: 'success', message: '' }); // Reset message and type
+      setAlert({ show: false, type: 'success', message: '' });
     }, 5000);
   };
 
   const closeAlert = () => {
-    setAlert({ show: false, type: 'success', message: '' }); // Reset message and type
+    setAlert({ show: false, type: 'success', message: '' });
   };
 
   // Validaciones
@@ -165,11 +164,27 @@ function CotizationForm({
       'otro': 'Otro'
     };
 
-    return {
+    // Preparar datos para el template de EmailJS
+    const templateParams = {
+      // Email de destino (configurado en EmailJS)
       to_email: 'gustavoangelc2005@gmail.com',
       from_name: data.nombre,
       from_email: data.email,
-      subject: `Nueva Cotización - ${data.nombre} - ${servicioText[data.tipoServicio as keyof typeof servicioText]}`,
+      
+      // Subject será manejado por EmailJS con: "Nueva Cotización - {{cliente_nombre}} - {{servicio_tipo}}"
+      // No necesitamos enviarlo desde aquí
+      
+      // Variables del template HTML que coinciden exactamente
+      fecha_solicitud: fechaActual,
+      cliente_nombre: data.nombre,
+      cliente_empresa: data.empresa || 'No especificada',
+      cliente_email: data.email,
+      cliente_telefono: data.telefono,
+      servicio_tipo: servicioText[data.tipoServicio as keyof typeof servicioText] || data.tipoServicio,
+      servicio_urgencia: urgenciaText[data.urgencia as keyof typeof urgenciaText] || 'No especificada',
+      proyecto_descripcion: data.mensaje,
+      
+      // Mensaje de texto plano como fallback (por si el HTML falla)
       message: `
 NUEVA COTIZACIÓN - TORNO Y FRESADORA ORTIZ
 ═══════════════════════════════════════════
@@ -197,23 +212,21 @@ Este email fue generado automáticamente desde el sitio web.
 Para responder al cliente, use: ${data.email}
 Teléfono del cliente: ${data.telefono}
 ═══════════════════════════════════════════
-      `.trim(),
-      // Campos individuales para el template
-      cliente_nombre: data.nombre,
-      cliente_empresa: data.empresa,
-      cliente_email: data.email,
-      cliente_telefono: data.telefono,
-      servicio_tipo: servicioText[data.tipoServicio as keyof typeof servicioText],
-      servicio_urgencia: urgenciaText[data.urgencia as keyof typeof urgenciaText] || 'No especificada',
-      proyecto_descripcion: data.mensaje,
-      fecha_solicitud: fechaActual
+      `.trim()
     };
+
+    console.log('📧 Template Parameters enviados a EmailJS:', templateParams);
+    return templateParams;
   };
 
-  const sendEmail = async (data: FormData): Promise<boolean> => {
+  const sendEmail = async (data: FormData): Promise<{ success: boolean; error?: string }> => {
     try {
+      console.log('🚀 Iniciando envío de email...');
+      console.log('📋 Configuración EmailJS:', EMAILJS_CONFIG);
+      
       const templateParams = formatEmailTemplate(data);
-
+      
+      console.log('📨 Enviando con EmailJS...');
       const response = await emailjs.send(
         EMAILJS_CONFIG.serviceId,
         EMAILJS_CONFIG.templateId,
@@ -221,10 +234,31 @@ Teléfono del cliente: ${data.telefono}
         EMAILJS_CONFIG.userId
       );
 
-      return response.status === 200;
-    } catch (error) {
-      console.error('Error al enviar email:', error);
-      return false;
+      console.log('✅ Respuesta de EmailJS:', response);
+
+      if (response.status === 200) {
+        return { success: true };
+      } else {
+        return { 
+          success: false, 
+          error: `EmailJS respondió con status: ${response.status} - ${response.text}` 
+        };
+      }
+
+    } catch (error: any) {
+      console.error('❌ Error detallado al enviar email:', error);
+      
+      let errorMessage = 'Error desconocido';
+      
+      if (error.text) {
+        errorMessage = `EmailJS Error: ${error.text}`;
+      } else if (error.message) {
+        errorMessage = `Error: ${error.message}`;
+      } else if (typeof error === 'string') {
+        errorMessage = error;
+      }
+
+      return { success: false, error: errorMessage };
     }
   };
 
@@ -237,19 +271,19 @@ Teléfono del cliente: ${data.telefono}
     }
 
     setIsSubmitting(true);
+    console.log('📝 Formulario válido, enviando datos...');
 
     try {
-      // Enviar email
-      const emailSent = await sendEmail(formData);
+      const result = await sendEmail(formData);
 
-      if (emailSent) {
+      if (result.success) {
+        console.log('🎉 Email enviado exitosamente!');
+        
         // Si se proporciona una función onSubmit personalizada, usarla
         if (onSubmit) {
           onSubmit(formData);
         }
 
-        // <<-- IMPORTANTE: AQUÍ ES DONDE LLAMAS A LA FUNCIÓN PARA MOSTRAR LA ALERTA
-        // Y NO RENDERIZAS EL JSX DE LA ALERTA DIRECTAMENTE -->>
         showAlert('success', '🎉 ¡Cotización enviada exitosamente! 📧 Nos pondremos en contacto contigo muy pronto para discutir tu proyecto.');
 
         // Limpiar formulario después del envío exitoso
@@ -264,11 +298,12 @@ Teléfono del cliente: ${data.telefono}
         });
         setErrors({});
       } else {
-        throw new Error('Error al enviar el email');
+        console.error('💥 Error al enviar:', result.error);
+        showAlert('error', `❌ Error específico: ${result.error}. 📞 Por favor, contacta directamente al (462) 143-47-18.`);
       }
     } catch (error) {
-      console.error('Error al enviar formulario:', error);
-      showAlert('error', '❌ Ups! Hubo un problema al enviar tu cotización. 📞 Por favor, inténtalo de nuevo o contáctanos directamente al (462) 143-47-18. ¡Estamos aquí para ayudarte!');
+      console.error('💥 Error inesperado:', error);
+      showAlert('error', '❌ Error inesperado. 📞 Por favor, inténtalo de nuevo o contáctanos directamente al (462) 143-47-18.');
     } finally {
       setIsSubmitting(false);
     }
@@ -276,7 +311,7 @@ Teléfono del cliente: ${data.telefono}
 
   return (
     <>
-      {/* ALERTA PERSONALIZADA: ESTE BLOQUE VA FUERA DEL FORMULARIO Y SE CONTROLA CON EL ESTADO 'alert.show' */}
+      {/* ALERTA PERSONALIZADA */}
       {alert.show && (
         <div className={`${styles.customAlert} ${styles[alert.type]}`}>
           <div className={styles.alertContent}>
@@ -303,7 +338,6 @@ Teléfono del cliente: ${data.telefono}
         )}
 
         <form onSubmit={handleSubmit} noValidate>
-          {/* ... Resto de los campos del formulario ... */}
           <div className={styles.formGroup}>
             <label htmlFor="nombre" className={styles.formLabel}>
               Nombre Completo *

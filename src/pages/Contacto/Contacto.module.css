@@ -759,3 +759,282 @@
     filter: contrast(1.1) brightness(1.05);
   }
 }
+
+/* ===== PANTALLA FLOTANTE DE UBICACIÓN ===== */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99999; /* Z-index súper alto para estar sobre todo */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  animation: modalFadeIn 0.4s ease-out;
+}
+
+.modalBackdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  cursor: pointer;
+  z-index: 1;
+}
+
+.modalContainer {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1200px;
+  max-height: 90vh;
+  overflow: auto;
+  animation: modalSlideIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  /* Asegurar que esté centrado */
+  margin: auto;
+}
+
+.modalUbicacion {
+  margin: 0 !important;
+  box-shadow: 
+    0 30px 100px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(255, 255, 255, 0.1),
+    0 0 50px rgba(34, 197, 94, 0.2);
+  border: 2px solid rgba(34, 197, 94, 0.3);
+}
+
+/* ===== ANIMACIONES DE LA PANTALLA FLOTANTE ===== */
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+  }
+  to {
+    opacity: 1;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.7) translateY(-100px) rotateX(15deg);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05) translateY(-20px) rotateX(5deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0) rotateX(0deg);
+  }
+}
+
+/* ===== INDICADOR CLICKEABLE PARA UBICACIÓN ===== */
+.contactItemClickable {
+  cursor: pointer !important;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.contactItemClickable::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.05), rgba(59, 130, 246, 0.05));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: inherit;
+}
+
+.contactItemClickable:hover::before {
+  opacity: 1;
+}
+
+.contactItemClickable:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.2),
+    0 0 0 1px rgba(34, 197, 94, 0.3);
+  border-color: rgba(34, 197, 94, 0.4);
+}
+
+.contactItemClickable:active {
+  transform: translateY(0);
+}
+
+/* ===== INDICADOR VISUAL ===== */
+.clickIndicator {
+  margin-top: 0.8rem;
+  position: relative;
+}
+
+.clickText {
+  font-size: 0.85rem;
+  color: #22c55e;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  background: rgba(34, 197, 94, 0.1);
+  border-radius: 20px;
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  transition: all 0.3s ease;
+}
+
+.contactItemClickable:hover .clickText {
+  background: rgba(34, 197, 94, 0.2);
+  border-color: rgba(34, 197, 94, 0.5);
+  color: #16a34a;
+  transform: scale(1.05);
+}
+
+.clickAnimation {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  border: 2px solid #22c55e;
+  border-radius: 50%;
+  opacity: 0;
+  animation: pulseClick 2s ease-in-out infinite;
+}
+
+@keyframes pulseClick {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 1;
+  }
+  70% {
+    transform: translate(-50%, -50%) scale(3);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(3);
+    opacity: 0;
+  }
+}
+
+/* ===== MEJORAS ADICIONALES PARA EL ITEM DE UBICACIÓN ===== */
+.locationIcon {
+  color: #22c55e !important;
+  animation: locationPulse 3s ease-in-out infinite;
+}
+
+@keyframes locationPulse {
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 5px rgba(34, 197, 94, 0.3));
+  }
+  50% {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 15px rgba(34, 197, 94, 0.6));
+  }
+}
+
+/* ===== RESPONSIVE PARA PANTALLA FLOTANTE ===== */
+@media (max-width: 768px) {
+  .modalOverlay {
+    padding: 0.8rem;
+  }
+
+  .modalContainer {
+    max-height: 95vh;
+    max-width: 100%;
+  }
+
+  .modalUbicacion {
+    border-radius: 20px !important;
+    border-width: 1px;
+  }
+
+  .clickText {
+    font-size: 0.8rem;
+    padding: 0.3rem 0.6rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .modalOverlay {
+    padding: 0.4rem;
+  }
+
+  .modalContainer {
+    max-height: 98vh;
+    max-width: 100%;
+  }
+
+  .modalUbicacion {
+    border-radius: 16px !important;
+  }
+
+  .modalBackdrop {
+    background: rgba(0, 0, 0, 0.9);
+  }
+
+  .clickText {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+  }
+
+  .clickAnimation {
+    width: 15px;
+    height: 15px;
+  }
+}
+
+/* ===== MODO OSCURO PARA EL MODAL ===== */
+@media (prefers-color-scheme: dark) {
+  .modalBackdrop {
+    background: rgba(0, 0, 0, 0.9);
+  }
+
+  .modalUbicacion {
+    box-shadow: 
+      0 25px 80px rgba(0, 0, 0, 0.7),
+      0 0 0 1px rgba(255, 255, 255, 0.15);
+  }
+}
+
+/* ===== ACCESIBILIDAD PARA EL MODAL ===== */
+@media (prefers-reduced-motion: reduce) {
+  .modalOverlay {
+    animation: none !important;
+  }
+
+  .modalContainer {
+    animation: none !important;
+  }
+
+  .contactItemClickable {
+    transition: none !important;
+  }
+
+  .contactItemClickable:hover {
+    transform: none !important;
+  }
+
+  .clickAnimation {
+    animation: none !important;
+    display: none;
+  }
+
+  .locationIcon {
+    animation: none !important;
+  }
+}
