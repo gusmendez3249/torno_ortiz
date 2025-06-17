@@ -137,6 +137,7 @@ const Welcome: React.FC = () => {
 
   const openVideoModal = (videoUrl: string) => {
     setIsVideoModalOpen(true);
+    console.log(videoUrl); 
   };
 
   return (

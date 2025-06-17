@@ -110,7 +110,7 @@ function Footer() {
                 Navegación
               </h3>
               <ul className={styles.footerNav}>
-                {navigationItems.map((item, index) => {
+                {navigationItems.map((item) => {
                   const IconComponent = item.icon;
                   return (
                     <motion.li key={item.name} variants={itemVariants}>

@@ -1,10 +1,10 @@
 // App.tsx
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom'; // ✅ usa HashRouter
 import Welcome from './pages/Welcome/Welcome';
-import Capacidades from './pages/Capacidades';
-import Contacto from './pages/Contacto';
-import Nosotros from './pages/Nosotros';
-import NotFound from './pages/NotFound';
+import Capacidades from './pages/Capacidades/Capacidades';
+import Contacto from './pages/Contacto/Contacto';
+import Nosotros from './pages/Nosotros/Nosotros';
+import NotFound from './pages/NotFound/NotFound';
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 import './App.css';
@@ -32,11 +32,11 @@ function App() {
         }}>
           <Routes>
             <Route path='/' element={<Welcome />} />
-            <Route path='/inicio' element={<Welcome />} />
-            <Route path='/capacidades' element={<Capacidades />} />
-            <Route path='/nosotros' element={<Nosotros />} />
-            <Route path='/contacto' element={<Contacto />} />
-            <Route path="*" element={<NotFound />} />
+            <Route path='/inicio' element={<NotFound  />} />
+            <Route path='/capacidades' element={<NotFound  />} />
+            <Route path='/nosotros' element={<NotFound  />} />
+            <Route path='/contacto' element={<NotFound  />} />
+            <Route path='*' element={<NotFound />} />
           </Routes>
         </main>
         
