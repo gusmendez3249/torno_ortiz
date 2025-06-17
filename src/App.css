@@ -1,28 +1,89 @@
-/* App.css */
-* {
-  margin: 0;
-  padding: 0;
+/* Global CSS - Aplicar en tu index.css o App.css */
+
+/* ===== RESET GLOBAL PARA PREVENIR DOBLE SCROLLBAR ===== */
+*, *::before, *::after {
   box-sizing: border-box;
 }
 
-html, body {
+html {
+  /* Prevenir scroll horizontal a nivel global */
+  overflow-x: hidden;
+  /* Asegurar que html ocupe exactamente el viewport */
+  width: 100%;
+  max-width: 100%;
+}
+
+body {
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  /* Backup para prevenir overflow horizontal */
+  overflow-x: hidden;
+  /* Asegurar que body no cause overflow */
+  width: 100%;
+  max-width: 100%;
 }
 
+/* ===== ROOT APP CONTAINER ===== */
 #root {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  position: relative;
 }
 
-.App {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+/* ===== PREVENIR PROBLEMAS CON FRAMER MOTION ===== */
+[data-framer-component] {
+  box-sizing: border-box !important;
+  max-width: 100% !important;
+}
+
+/* ===== REGLAS PARA ELEMENTOS FULL-WIDTH ===== */
+.full-width-section {
+  /* ✅ USAR ESTO en lugar de width: 100vw */
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* ===== UTILITIES PARA DEBUGGING ===== */
+.debug-overflow {
+  border: 2px solid red !important;
+  overflow: visible !important;
+}
+
+/* Mostrar elementos que causan overflow (usar temporalmente) */
+.debug-mode * {
+  outline: 1px solid rgba(255, 0, 0, 0.3) !important;
+}
+
+/* ===== MEJORAS PARA MOBILE ===== */
+@media (max-width: 768px) {
+  html, body {
+    /* En móvil es más crítico prevenir overflow horizontal */
+    overflow-x: hidden !important;
+  }
+  
+  /* Prevenir zoom en inputs en iOS */
+  input, select, textarea {
+    font-size: 16px !important;
+  }
+}
+
+/* ===== SCROLLBAR STYLING (OPCIONAL) ===== */
+/* Scrollbar más delgado para reducir impacto en viewport */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.5);
 }

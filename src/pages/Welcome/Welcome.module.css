@@ -1,4 +1,59 @@
-/* Welcome.module.css - Diseño Minimalista Estilo Apple/Samsung */
+.sectionHeader {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.sectionTitle {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 800;
+  margin-bottom: 20px;
+  letter-spacing: -0.03em;
+  color: var(--text-primary-light);
+}
+
+.sectionSubtitle {
+  font-size: 1.25rem;
+  color: var(--text-secondary-light);
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+/* ===== MEJORAS ADICIONALES PARA PREVENIR OVERFLOW ===== */
+
+/* Prevenir que Framer Motion cause overflow */
+.welcome [data-framer-component] {
+  box-sizing: border-box;
+}
+
+/* Asegurar que las imágenes no causen overflow */
+.welcome img {
+  max-width: 100%;
+  height: auto;
+  box-sizing: border-box;
+}
+
+/* Prevenir overflow en elementos con position absolute */
+.welcome *[class*="absolute"] {
+  max-width: 100%;
+  box-sizing: border-box;
+}/* ===== PRINT STYLES ===== */
+@media print {
+  .videoModal,
+  .carouselButton,
+  .playButton {
+    display: none !important;
+  }
+  
+  .hero,
+  .services,
+  .gallery,
+  .experience,
+  .cta {
+    page-break-inside: avoid;
+  }
+}/* Welcome.module.css - Versión SIN doble scrollbar */
 
 /* ===== VARIABLES GLOBALES ===== */
 .welcome {
@@ -41,14 +96,26 @@
   --border-radius-lg: 24px;
 }
 
-/* ===== BASE STYLES ===== */
+/* ===== BASE STYLES CORREGIDOS ===== */
 .welcome {
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', system-ui, sans-serif;
   line-height: 1.6;
-  overflow-x: hidden;
+  
+  /* ❌ ANTES: overflow-x: hidden; (puede ocultar problemas) */
+  /* ✅ DESPUÉS: Controlar overflow correctamente */
+  overflow-x: auto; /* Permitir scroll horizontal si es necesario, pero evitarlo */
+  
   position: relative;
   background: var(--light-gradient);
   color: var(--text-primary-light);
+  
+  /* ❌ CRÍTICO: NO usar width: 100vw */
+  /* ✅ USAR: width: 100% */
+  width: 100%;
+  min-width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 /* ===== ANIMACIONES GLOBALES ===== */
@@ -91,14 +158,23 @@
   }
 }
 
-/* ===== HERO SECTION ===== */
+/* ===== HERO SECTION CORREGIDO ===== */
 .hero {
   min-height: 100vh;
   display: flex;
   align-items: center;
   position: relative;
-  overflow: hidden;
+  
+  /* ❌ ANTES: overflow: hidden; (puede ocultar problemas) */
+  /* ✅ DESPUÉS: Controlar overflow específicamente */
+  overflow-x: hidden; /* Solo ocultar overflow horizontal aquí */
+  overflow-y: visible; /* Permitir overflow vertical si es necesario */
+  
   background: var(--dark-gradient);
+  
+  /* ❌ CRÍTICO: Asegurar que no hay width: 100vw aquí */
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .heroBackground {
@@ -106,6 +182,7 @@
   inset: 0;
   pointer-events: none;
   z-index: 1;
+  overflow: hidden; /* Contener los orbes dentro del hero */
 }
 
 .gradientOrb1,
@@ -116,6 +193,7 @@
   filter: blur(100px);
   opacity: 0.2;
   animation: float 20s ease-in-out infinite;
+  will-change: transform; /* Optimización para animaciones */
 }
 
 .gradientOrb1 {
@@ -168,10 +246,14 @@
   grid-template-columns: 1fr 1fr;
   gap: 80px;
   align-items: center;
+  
+  /* ❌ ANTES: width: 100%; */
+  /* ✅ DESPUÉS: Usar max-width con margin auto */
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 var(--container-padding);
+  box-sizing: border-box; /* CRÍTICO: incluir padding en el width */
 }
 
 .heroContent {
@@ -382,39 +464,25 @@
   to { transform: rotate(360deg); }
 }
 
-/* ===== SECTIONS GENERALES ===== */
+/* ===== SECTIONS GENERALES CORREGIDAS ===== */
 .container {
+  /* ❌ ANTES: max-width: 1400px; margin: 0 auto; padding: var(--section-padding) var(--container-padding); */
+  /* ✅ DESPUÉS: Estructura más limpia */
+  width: 100%;
   max-width: 1400px;
   margin: 0 auto;
   padding: var(--section-padding) var(--container-padding);
+  box-sizing: border-box; /* CRÍTICO */
 }
 
-.sectionHeader {
-  text-align: center;
-  margin-bottom: 80px;
-}
-
-.sectionTitle {
-  font-size: clamp(2.5rem, 6vw, 4rem);
-  font-weight: 800;
-  margin-bottom: 20px;
-  letter-spacing: -0.03em;
-  color: var(--text-primary-light);
-}
-
-.sectionSubtitle {
-  font-size: 1.25rem;
-  color: var(--text-secondary-light);
-  max-width: 700px;
-  margin: 0 auto;
-  line-height: 1.6;
-  font-weight: 400;
-}
-
-/* ===== SERVICES SECTION ===== */
+/* ===== SERVICES SECTION CORREGIDA ===== */
 .services {
   background: var(--light-gradient);
   position: relative;
+  
+  /* ❌ Asegurar que no hay width: 100vw */
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .services::before {
@@ -425,6 +493,50 @@
     radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.03) 0%, transparent 50%),
     radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.03) 0%, transparent 50%);
   pointer-events: none;
+}
+
+/* ===== GALLERY SECTION CORREGIDA ===== */
+.gallery {
+  background: var(--dark-gradient);
+  color: var(--text-primary-dark);
+  position: relative;
+  
+  /* ❌ Asegurar que no hay width: 100vw */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.gallery::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(circle at 70% 20%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 20% 80%, rgba(139, 92, 246, 0.08) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* ===== EXPERIENCE SECTION CORREGIDA ===== */
+.experience {
+  background: var(--light-gradient);
+  position: relative;
+  
+  /* ❌ Asegurar que no hay width: 100vw */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ===== CTA SECTION CORREGIDA ===== */
+.cta {
+  background: var(--dark-gradient);
+  color: var(--text-primary-dark);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  
+  /* ❌ Asegurar que no hay width: 100vw */
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .servicesGrid {
@@ -1498,7 +1610,42 @@
   }
 }
 
-/* ===== PRINT STYLES ===== */
+/* ===== MEJORAS DE CONTRASTE Y LEGIBILIDAD ===== */
+
+/* Asegurar legibilidad en todos los estados */
+.serviceCard .serviceTitle,
+.serviceCard .serviceDescription,
+.serviceCard .serviceFeatures li {
+  transition: color 0.3s var(--ease-out-expo);
+}
+
+.statCard .statNumber,
+.statCard .statLabel {
+  transition: color 0.3s var(--ease-out-expo);
+}
+
+/* Estados hover mejorados para modo claro */
+@media (prefers-color-scheme: light), (prefers-color-scheme: no-preference) {
+  .serviceCard:hover,
+  .statCard:hover {
+    background: rgba(255, 255, 255, 0.98) !important;
+    color: var(--text-primary-light) !important;
+  }
+  
+  .serviceCard:hover .serviceTitle,
+  .serviceCard:hover .serviceDescription,
+  .serviceCard:hover .serviceFeatures li,
+  .statCard:hover .statNumber,
+  .statCard:hover .statLabel {
+    color: var(--text-primary-light) !important;
+  }
+  
+  .serviceCard:hover .serviceDescription,
+  .serviceCard:hover .serviceFeatures li,
+  .statCard:hover .statLabel {
+    color: var(--text-secondary-light) !important;
+  }
+}
 @media print {
   .videoModal,
   .carouselButton,

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaHome, FaExclamationTriangle } from 'react-icons/fa';
 import styles from './NotFound.module.css';

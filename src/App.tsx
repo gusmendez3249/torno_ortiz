@@ -1,9 +1,9 @@
 // App.tsx
 import { HashRouter as Router, Routes, Route } from 'react-router-dom'; // ✅ usa HashRouter
 import Welcome from './pages/Welcome/Welcome';
-import Capacidades from './pages/Capacidades/Capacidades';
-import Contacto from './pages/Contacto/Contacto';
-import Nosotros from './pages/Nosotros/Nosotros';
+//import Capacidades from './pages/Capacidades/Capacidades';
+//import Contacto from './pages/Contacto/Contacto';
+//import Nosotros from './pages/Nosotros/Nosotros';
 import NotFound from './pages/NotFound/NotFound';
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
