@@ -1,0 +1,802 @@
+/* Nosotros.module.css - Versión Completamente Responsive */
+
+/* ===== CONTAINER PRINCIPAL ===== */
+.nosotrosContainer {
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+  color: #ffffff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* ===== EFECTOS DE FONDO ===== */
+.backgroundEffects {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.gradientOrb1,
+.gradientOrb2,
+.gradientOrb3,
+.gradientOrb4 {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.08;
+  animation: float 25s ease-in-out infinite;
+}
+
+.gradientOrb1 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, #22c55e, transparent);
+  top: 5%;
+  left: 5%;
+  animation-delay: 0s;
+}
+
+.gradientOrb2 {
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, #3b82f6, transparent);
+  bottom: 10%;
+  right: 5%;
+  animation-delay: 8s;
+}
+
+.gradientOrb3 {
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, #f59e0b, transparent);
+  top: 50%;
+  left: 70%;
+  animation-delay: 16s;
+}
+
+.gradientOrb4 {
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, #8b5cf6, transparent);
+  top: 30%;
+  left: 20%;
+  animation-delay: 24s;
+}
+
+@keyframes float {
+  0%, 100% { 
+    transform: translateY(0px) translateX(0px) rotate(0deg); 
+    opacity: 0.08;
+  }
+  25% { 
+    transform: translateY(-50px) translateX(30px) rotate(8deg); 
+    opacity: 0.15;
+  }
+  50% { 
+    transform: translateY(-25px) translateX(-25px) rotate(-8deg); 
+    opacity: 0.12;
+  }
+  75% { 
+    transform: translateY(-35px) translateX(20px) rotate(5deg); 
+    opacity: 0.1;
+  }
+}
+
+/* ===== CONTENIDO PRINCIPAL ===== */
+.mainContent {
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== HERO SECTION ===== */
+.heroSection {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  position: relative;
+}
+
+.heroContent {
+  max-width: 1000px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 32px;
+  padding: 4rem 3rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.heroContent::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(90deg, #22c55e, #16a34a, #15803d, #3b82f6);
+  border-radius: 32px 32px 0 0;
+}
+
+.companyLogo {
+  font-size: 4rem;
+  color: #22c55e;
+  margin-bottom: 2rem;
+  filter: drop-shadow(0 0 30px rgba(34, 197, 94, 0.4));
+}
+
+.heroTitle {
+  font-size: 4rem;
+  font-weight: 900;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -2px;
+  line-height: 1.1;
+}
+
+.heroSubtitle {
+  font-size: 1.5rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 2rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.heroDescription {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.6;
+  margin-bottom: 3rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.statCard {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  padding: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.statCard:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+.statNumber {
+  font-size: 3rem;
+  font-weight: 900;
+  color: #22c55e;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.statLabel {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 600;
+}
+
+/* ===== SECCIÓN DE HISTORIA ===== */
+.historySection {
+  padding: 6rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.sectionHeader {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.sectionTitle {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(135deg, #3b82f6, #60a5fa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.2;
+}
+
+.sectionSubtitle {
+  font-size: 1.3rem;
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.timelineContainer {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.timelineItem {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 24px;
+  padding: 3rem;
+  margin-bottom: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.timelineItem:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  border-color: rgba(34, 197, 94, 0.3);
+}
+
+.timelineIcon {
+  position: absolute;
+  top: -20px;
+  left: 3rem;
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: #ffffff;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  box-shadow: 0 10px 30px rgba(34, 197, 94, 0.3);
+}
+
+.timelineContent h3 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.95);
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+
+.timelineContent p {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+/* ===== SECCIÓN DE VALORES ===== */
+.valuesSection {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 6rem 2rem;
+  margin: 4rem 0;
+}
+
+.valuesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.valueCard {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  padding: 3rem 2rem;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.valueCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #22c55e, #16a34a);
+  border-radius: 24px 24px 0 0;
+}
+
+.valueCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.valueIcon {
+  font-size: 3rem;
+  color: #22c55e;
+  margin-bottom: 1.5rem;
+  filter: drop-shadow(0 0 20px rgba(34, 197, 94, 0.3));
+}
+
+.valueTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.95);
+  margin-bottom: 1rem;
+}
+
+.valueDescription {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.6;
+}
+
+/* ===== SECCIÓN DE EQUIPO ===== */
+.teamSection {
+  padding: 6rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.founderCard {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 32px;
+  padding: 4rem 3rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.founderCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(90deg, #8b5cf6, #a855f7);
+  border-radius: 32px 32px 0 0;
+}
+
+.founderAvatar {
+  width: 120px;
+  height: 120px;
+  background: linear-gradient(135deg, #8b5cf6, #a855f7);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  color: #ffffff;
+  margin: 0 auto 2rem;
+  box-shadow: 0 15px 40px rgba(139, 92, 246, 0.3);
+}
+
+.founderName {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.95);
+  margin-bottom: 0.5rem;
+}
+
+.founderTitle {
+  font-size: 1.2rem;
+  color: #8b5cf6;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.founderDescription {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.6;
+}
+
+/* ===== SECCIÓN DE COMPROMISO ===== */
+.commitmentSection {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  padding: 6rem 2rem;
+  text-align: center;
+  margin: 4rem 0 0 0;
+}
+
+.commitmentContent {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.commitmentTitle {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 2rem;
+  line-height: 1.2;
+}
+
+.commitmentDescription {
+  font-size: 1.3rem;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.6;
+  margin-bottom: 3rem;
+}
+
+.commitmentFeatures {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.commitmentFeature {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.commitmentIcon {
+  font-size: 2.5rem;
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+
+.commitmentFeatureTitle {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+
+.commitmentFeatureText {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.5;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 1024px) {
+  .heroTitle {
+    font-size: 3rem;
+  }
+  
+  .sectionTitle {
+    font-size: 2.5rem;
+  }
+  
+  .commitmentTitle {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroSection {
+    padding: 1rem;
+    min-height: auto;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+  
+  .heroContent {
+    padding: 2.5rem 2rem;
+    border-radius: 24px;
+  }
+  
+  .companyLogo {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .heroTitle {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .heroSubtitle {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .heroDescription {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .statsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  
+  .statCard {
+    padding: 1.5rem;
+  }
+  
+  .statNumber {
+    font-size: 2rem;
+  }
+  
+  .historySection,
+  .teamSection {
+    padding: 4rem 1rem;
+  }
+  
+  .valuesSection,
+  .commitmentSection {
+    padding: 4rem 1rem;
+  }
+  
+  .sectionTitle {
+    font-size: 2rem;
+  }
+  
+  .sectionSubtitle {
+    font-size: 1.1rem;
+  }
+  
+  .timelineItem {
+    padding: 2rem;
+  }
+  
+  .timelineIcon {
+    left: 2rem;
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+  }
+  
+  .valuesGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .valueCard {
+    padding: 2rem 1.5rem;
+  }
+  
+  .founderCard {
+    padding: 3rem 2rem;
+    border-radius: 24px;
+  }
+  
+  .founderAvatar {
+    width: 100px;
+    height: 100px;
+    font-size: 2.5rem;
+  }
+  
+  .founderName {
+    font-size: 1.8rem;
+  }
+  
+  .commitmentTitle {
+    font-size: 2rem;
+  }
+  
+  .commitmentDescription {
+    font-size: 1.1rem;
+  }
+  
+  .commitmentFeatures {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .gradientOrb1,
+  .gradientOrb2,
+  .gradientOrb3,
+  .gradientOrb4 {
+    filter: blur(60px);
+  }
+  
+  .gradientOrb1 {
+    width: 250px;
+    height: 250px;
+  }
+  
+  .gradientOrb2 {
+    width: 200px;
+    height: 200px;
+  }
+  
+  .gradientOrb3 {
+    width: 180px;
+    height: 180px;
+  }
+  
+  .gradientOrb4 {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroContent {
+    padding: 2rem 1.5rem;
+  }
+  
+  .heroTitle {
+    font-size: 2rem;
+  }
+  
+  .heroSubtitle {
+    font-size: 1rem;
+  }
+  
+  .statsGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .statNumber {
+    font-size: 1.8rem;
+  }
+  
+  .sectionTitle {
+    font-size: 1.8rem;
+  }
+  
+  .timelineItem {
+    padding: 1.5rem;
+  }
+  
+  .timelineIcon {
+    left: 1.5rem;
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+  
+  .valueCard {
+    padding: 1.5rem;
+  }
+  
+  .valueIcon {
+    font-size: 2.5rem;
+  }
+  
+  .founderCard {
+    padding: 2rem 1.5rem;
+  }
+  
+  .founderAvatar {
+    width: 80px;
+    height: 80px;
+    font-size: 2rem;
+  }
+  
+  .founderName {
+    font-size: 1.5rem;
+  }
+  
+  .commitmentTitle {
+    font-size: 1.8rem;
+  }
+  
+  .commitmentFeature {
+    padding: 1.5rem;
+  }
+}
+
+/* ===== DISPOSITIVOS MUY PEQUEÑOS ===== */
+@media (max-width: 360px) {
+  .heroTitle {
+    font-size: 1.8rem;
+  }
+  
+  .heroContent {
+    padding: 1.5rem 1rem;
+  }
+  
+  .timelineItem {
+    padding: 1.2rem;
+  }
+  
+  .valueCard {
+    padding: 1.2rem;
+  }
+  
+  .founderCard {
+    padding: 1.5rem 1rem;
+  }
+}
+
+/* ===== ORIENTACIÓN LANDSCAPE EN MÓVILES ===== */
+@media (max-height: 500px) and (orientation: landscape) {
+  .heroSection {
+    min-height: auto;
+    padding: 1rem;
+  }
+  
+  .heroContent {
+    padding: 1.5rem;
+  }
+  
+  .heroTitle {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .heroSubtitle {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .heroDescription {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+  
+  .statsGrid {
+    margin-top: 1rem;
+  }
+}
+
+/* ===== ACCESIBILIDAD ===== */
+@media (prefers-reduced-motion: reduce) {
+  .gradientOrb1,
+  .gradientOrb2,
+  .gradientOrb3,
+  .gradientOrb4 {
+    animation: none !important;
+  }
+  
+  .statCard,
+  .timelineItem,
+  .valueCard,
+  .commitmentFeature {
+    transition: none !important;
+  }
+  
+  .statCard:hover,
+  .timelineItem:hover,
+  .valueCard:hover {
+    transform: none !important;
+  }
+}
+
+/* ===== MODO OSCURO NATIVO ===== */
+@media (prefers-color-scheme: dark) {
+  .nosotrosContainer {
+    background: linear-gradient(135deg, #0a0a1a 0%, #111125 50%, #0f1829 100%);
+  }
+}
+
+/* ===== SOPORTE PARA PANTALLAS DE ALTA DENSIDAD ===== */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .companyLogo,
+  .timelineIcon,
+  .valueIcon,
+  .commitmentIcon {
+    filter: contrast(1.1) brightness(1.05);
+  }
+}
