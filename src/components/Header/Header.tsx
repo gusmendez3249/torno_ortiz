@@ -85,26 +85,9 @@ const Header: React.FC = () => {
     setIsCotizationModalOpen(false);
   };
 
-  const handleCotizationSubmit = (formData: any) => {
-    console.log('Cotización desde header:', formData);
-    
-    // Agregar contexto de que viene del header
-    const dataWithContext = {
-      ...formData,
-      source: 'header_modal',
-      timestamp: new Date().toISOString()
-    };
-
-    // Aquí puedes integrar con tu API, analytics, etc.
-    console.log('Datos con contexto:', dataWithContext);
-    // sendToAPI(dataWithContext);
-    // gtag('event', 'cotization_request', { source: 'header' });
-
-    // Mostrar mensaje de éxito
-    alert('¡Cotización enviada exitosamente! Nos pondremos en contacto contigo pronto.');
-    
-    // Cerrar modal después del envío
-    closeCotizationModal();
+ const handleCotizationSubmit = (formData: any) => {
+    console.log('Datos recibidos en Contacto:', formData);
+     
   };
 
   const headerVariants: Variants = {

@@ -42,15 +42,7 @@ function Contacto() {
   // Función personalizada para manejar el envío del formulario
   const handleCotizationSubmit = (formData: any) => {
     console.log('Datos recibidos en Contacto:', formData);
-    
-    // Aquí puedes agregar lógica específica para la página de contacto
-    // Como enviar a una API específica, tracking de analytics, etc.
-    
-    // Por ejemplo, enviar a una API
-    // sendToAPI(formData);
-    
-    // Mostrar mensaje de éxito
-    alert('¡Gracias por contactarnos! Nos pondremos en contacto contigo pronto.');
+     
   };
 
   return (

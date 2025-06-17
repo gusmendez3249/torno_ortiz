@@ -87,23 +87,9 @@ const Welcome: React.FC = () => {
     setIsCotizationModalOpen(false);
   };
 
-  const handleCotizationSubmit = (formData: any) => {
-    console.log('Cotización desde Welcome:', formData);
-    
-    // Agregar contexto específico de la página Welcome
-    const dataWithContext = {
-      ...formData,
-      source: 'welcome_page',
-      timestamp: new Date().toISOString(),
-      page_section: 'main_page'
-    };
-
-    console.log('Datos con contexto:', dataWithContext);
-    // sendToAPI(dataWithContext);
-    // gtag('event', 'cotization_request', { source: 'welcome' });
-
-    alert('¡Cotización enviada exitosamente! Nos pondremos en contacto contigo pronto.');
-    closeCotizationModal();
+ const handleCotizationSubmit = (formData: any) => {
+    console.log('Datos recibidos en Contacto:', formData);
+     
   };
 
   const services = [
