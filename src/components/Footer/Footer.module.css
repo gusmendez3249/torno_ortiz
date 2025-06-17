@@ -12,8 +12,8 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
   margin: 0 !important;
   margin-top: auto !important;
-  width: 100vw !important;
-  min-width: 100% !important;
+  width: 100%;  
+  min-width: 100%;
   box-sizing: border-box !important;
   position: relative;
   z-index: 1;
@@ -78,24 +78,25 @@
 }
 
 .footerContainer {
-  max-width: none !important;
-  width: 100% !important;
-  margin: 0 !important;
-  padding: 0 2rem !important;  /* Menos padding izquierdo */
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 2rem;
   position: relative;
   z-index: 2;
+  box-sizing: border-box;
 }
 
 .footerContent {
-  display: grid !important;
-  grid-template-columns: 450px 1fr !important;
-  gap: 6rem !important;
-  padding: 4rem 2rem 2.5rem !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
-  align-items: start !important;
-  max-width: 1400px;
-  margin: 0 auto;
-  justify-self: start;
+  display: grid;
+  grid-template-columns: 450px 1fr;
+  gap: 6rem;
+
+  padding: 4rem 0 2.5rem;
+  
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  align-items: start;
+  box-sizing: border-box;
 }
 
 /* Sección Logo Mejorada */
@@ -453,7 +454,7 @@
 /* Responsive Design */
 @media (max-width: 768px) {
   .footerContainer {
-    padding: 0 1rem !important;
+    padding: 0 1rem;
   }
   
   .footerContent {

@@ -164,7 +164,7 @@ const Welcome: React.FC = () => {
             </h1>
             
             <p className={styles.heroDescription}>
-              Especializados en mecanizado de alta precisión con <strong>26 años de experiencia</strong> 
+              Especializados en mecanizado de alta precisión con <strong>26 años de experiencia </strong> 
               en metal mecánica y mantenimiento industrial. Fabricamos piezas según sus necesidades 
               con la más avanzada maquinaria CNC.
             </p>

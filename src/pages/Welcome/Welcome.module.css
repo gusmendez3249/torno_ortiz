@@ -101,18 +101,15 @@
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', system-ui, sans-serif;
   line-height: 1.6;
   
-  /* ❌ ANTES: overflow-x: hidden; (puede ocultar problemas) */
-  /* ✅ DESPUÉS: Controlar overflow correctamente */
-  overflow-x: auto; /* Permitir scroll horizontal si es necesario, pero evitarlo */
+
+  overflow-x: hidden; /* Nunca permitir scroll horizontal */
   
   position: relative;
   background: var(--light-gradient);
   color: var(--text-primary-light);
   
-  /* ❌ CRÍTICO: NO usar width: 100vw */
-  /* ✅ USAR: width: 100% */
   width: 100%;
-  min-width: 100%;
+  max-width: 100%;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -164,17 +161,7 @@
   display: flex;
   align-items: center;
   position: relative;
-  
-  /* ❌ ANTES: overflow: hidden; (puede ocultar problemas) */
-  /* ✅ DESPUÉS: Controlar overflow específicamente */
-  overflow-x: hidden; /* Solo ocultar overflow horizontal aquí */
-  overflow-y: visible; /* Permitir overflow vertical si es necesario */
-  
   background: var(--dark-gradient);
-  
-  /* ❌ CRÍTICO: Asegurar que no hay width: 100vw aquí */
-  width: 100%;
-  box-sizing: border-box;
 }
 
 .heroBackground {
@@ -190,10 +177,13 @@
 .gradientOrb3 {
   position: absolute;
   border-radius: 50%;
-  filter: blur(100px);
+  filter: blur(80px);
   opacity: 0.2;
-  animation: float 20s ease-in-out infinite;
-  will-change: transform; /* Optimización para animaciones */
+  animation: float 15s ease-in-out infinite;
+  will-change: transform;
+  /* Asegurar que no salgan del contenedor */
+  max-width: 100%;
+  max-height: 100%;/* Optimización para animaciones */
 }
 
 .gradientOrb1 {
@@ -734,11 +724,13 @@
 .carouselTrack {
   display: flex;
   transition: transform 0.8s var(--ease-out-expo);
+  will-change: transform;
 }
 
 .carouselSlide {
   min-width: 100%;
-  position: relative;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .slideContent {
@@ -1205,6 +1197,8 @@
   .heroContainer {
     gap: 60px;
   }
+
+
   
   .experienceContent {
     gap: 60px;
@@ -1652,12 +1646,40 @@
   .playButton {
     display: none !important;
   }
+
+.heroBackground,
+.backgroundEffects {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden; /* CRÍTICO: contener orbes animados */
+}
+
+.heroContainer,
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+  box-sizing: border-box;
+}
   
   .hero,
   .services,
   .gallery,
   .experience,
   .cta {
-    page-break-inside: avoid;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        overflow-x: hidden;
   }
+}
+
+.serviceImage,
+.videoThumbnail,
+.slideImage {
+  max-width: 100%;
+  height: auto;
+  box-sizing: border-box;
 }
