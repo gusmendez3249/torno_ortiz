@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { 
   FaIndustry, 
   FaCog, 
-  FaCalendarAlt,
   FaAward,
   FaUsers,
   FaMedal,

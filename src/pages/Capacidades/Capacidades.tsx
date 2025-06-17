@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { 
   FaCog, 
   FaIndustry, 
@@ -8,11 +7,8 @@ import {
   FaStar,
   FaWrench,
   FaHammer,
-  FaBolt,
   FaClock,
   FaTruck,
-  FaPhone,
-  FaEnvelope,
   FaShieldAlt,
   FaFire,
   FaCube,
