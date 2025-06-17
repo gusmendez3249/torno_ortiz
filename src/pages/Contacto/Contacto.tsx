@@ -14,9 +14,11 @@ import {
 } from 'react-icons/fa';
 import CotizationForm from '../../components/Cotizar/CotizationForm';
 import styles from './Contacto.module.css';
+import UbicacionEmbed from "../../components/Ubicacion/Ubicacion";
 
 function Contacto() {
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
+  const [mostrarMapa, setMostrarMapa] = useState(false);
 
   // Actualizar altura de ventana dinámicamente
   useEffect(() => {
@@ -113,8 +115,7 @@ function Contacto() {
                 </div>
               </div>
 
-              {/* Ubicación */}
-              <div className={styles.contactItem}>
+              <div className={styles.contactItem} onClick={() => setMostrarMapa(true)} style={{ cursor: "pointer" }}>
                 <FaMapMarkerAlt className={`${styles.contactItemIcon} ${styles.locationIcon}`} />
                 <div className={styles.contactItemContent}>
                   <h3>Ubicación</h3>
@@ -123,6 +124,12 @@ function Contacto() {
                   <p>Irapuato, Guanajuato, México</p>
                 </div>
               </div>
+
+              {mostrarMapa && (
+              // o con estilos:
+              <UbicacionEmbed onClose={() => setMostrarMapa(false)} className="mb-8" />
+
+              )}
 
               {/* Horarios */}
               <div className={styles.contactItem}>
