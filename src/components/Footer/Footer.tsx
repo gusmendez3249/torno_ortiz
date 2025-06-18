@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom'; // ✅ Agregado useLocation
 import { motion } from 'framer-motion';
 import { 
   FaHome, 
@@ -15,6 +16,7 @@ import UbicacionEmbed from '../Ubicacion/Ubicacion';
 
 function Footer() {
   const [mostrarMapa, setMostrarMapa] = useState(false);
+  const location = useLocation(); // ✅ Hook para obtener la ruta actual
 
   // Cerrar modal con ESC
   useEffect(() => {
@@ -62,11 +64,12 @@ function Footer() {
     }
   };
 
+  // ✅ CAMBIADO: href por path para React Router
   const navigationItems = [
-    { name: 'Inicio', icon: FaHome, href: 'inicio' },
-    { name: 'Capacidades', icon: FaCog, href: 'capacidades' },
-    { name: 'Nosotros', icon: FaUsers, href: 'nosotros' },
-    { name: 'Contacto', icon: FaEnvelope, href: 'contacto' }
+    { name: 'Inicio', icon: FaHome, path: '/' },
+    { name: 'Capacidades', icon: FaCog, path: '/capacidades' },
+    { name: 'Nosotros', icon: FaUsers, path: '/nosotros' },
+    { name: 'Contacto', icon: FaEnvelope, path: '/contacto' }
   ];
 
   return (
@@ -110,23 +113,26 @@ function Footer() {
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
-                <motion.div 
-                  className={styles.logoIcon}
-                  animate={{ 
-                    rotate: [0, 5, -5, 0],
-                  }}
-                  transition={{ 
-                    duration: 4,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }}
-                >
-                  <FaTools size={28} />
-                </motion.div>
-                <div className={styles.logoText}>
-                  <span className={styles.logoMain}>TORNO ORTIZ</span>
-                  <span className={styles.logoSub}>Servicio Industrial</span>
-                </div>
+                {/* ✅ CAMBIADO: href por Link */}
+                <Link to="/" className={styles.logoLink}>
+                  <motion.div 
+                    className={styles.logoIcon}
+                    animate={{ 
+                      rotate: [0, 5, -5, 0],
+                    }}
+                    transition={{ 
+                      duration: 4,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  >
+                    <FaTools size={28} />
+                  </motion.div>
+                  <div className={styles.logoText}>
+                    <span className={styles.logoMain}>TORNO ORTIZ</span>
+                    <span className={styles.logoSub}>Servicio Industrial</span>
+                  </div>
+                </Link>
               </motion.div>
               
               <motion.div 
@@ -155,20 +161,26 @@ function Footer() {
                 <ul className={styles.footerNav}>
                   {navigationItems.map((item) => {
                     const IconComponent = item.icon;
+                    const isActive = location.pathname === item.path; // ✅ Detectar si es la página actual
+                    
                     return (
                       <motion.li key={item.name} variants={itemVariants}>
-                        <motion.a 
-                          href={item.href}
-                          className={styles.footerLink}
+                        {/* ✅ CAMBIADO: De <a href> a <Link to> */}
+                        <motion.div
                           whileHover={{ 
                             x: 8,
                             scale: 1.02
                           }}
                           transition={{ duration: 0.2 }}
                         >
-                          <IconComponent className={styles.linkIcon} />
-                          {item.name}
-                        </motion.a>
+                          <Link 
+                            to={item.path}
+                            className={`${styles.footerLink} ${isActive ? styles.active : ''}`} // ✅ Clase activa
+                          >
+                            <IconComponent className={styles.linkIcon} />
+                            {item.name}
+                          </Link>
+                        </motion.div>
                       </motion.li>
                     );
                   })}
