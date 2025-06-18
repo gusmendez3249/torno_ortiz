@@ -90,15 +90,7 @@ const Header: React.FC = () => {
      
   };
 
-  const headerVariants: Variants = {
-    initial: { y: -100, opacity: 0 },
-    animate: { 
-      y: 0, 
-      opacity: 1,
-      transition: { duration: 0.8, ease: "easeOut" }
-    }
-  };
-
+  // SOLO el contenido tiene animaciones, no el header completo
   const logoVariants: Variants = {
     initial: { scale: 0.8, opacity: 0 },
     animate: { 
@@ -126,6 +118,32 @@ const Header: React.FC = () => {
       y: 0, 
       opacity: 1,
       transition: { duration: 0.4 }
+    }
+  };
+
+  const contactInfoVariants: Variants = {
+    initial: { opacity: 0, x: 50 },
+    animate: { 
+      opacity: 1, 
+      x: 0,
+      transition: { duration: 0.6, delay: 0.7 }
+    }
+  };
+
+  const ctaSectionVariants: Variants = {
+    initial: { opacity: 0, scale: 0.8 },
+    animate: { 
+      opacity: 1, 
+      scale: 1,
+      transition: { duration: 0.6, delay: 0.9 }
+    }
+  };
+
+  const mobileMenuButtonVariants: Variants = {
+    initial: { opacity: 0 },
+    animate: { 
+      opacity: 1,
+      transition: { duration: 0.6, delay: 1 }
     }
   };
 
@@ -175,23 +193,29 @@ const Header: React.FC = () => {
 
   return (
     <>
-      <motion.header 
+      {/* Header SIN animación inicial - permanece estático */}
+      <header 
         className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`}
-        variants={headerVariants}
-        initial="initial"
-        animate="animate"
       >
-        {/* Efectos de fondo */}
+        {/* Efectos de fondo - siempre visibles */}
         <div className={styles.backgroundEffects}>
           <div className={styles.gradientOrb1}></div>
           <div className={styles.gradientOrb2}></div>
         </div>
 
-        <div className={styles.headerContainer}>
+        {/* Solo el contenido del header tiene animaciones */}
+        <motion.div 
+          className={styles.headerContainer}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
           {/* Logo Section */}
           <motion.div 
             className={styles.logoSection}
             variants={logoVariants}
+            initial="initial"
+            animate="animate"
           >
             <Link to="/" className={styles.logoLink}>
               <motion.div 
@@ -214,9 +238,9 @@ const Header: React.FC = () => {
           {/* Contact Info - Solo desktop */}
           <motion.div 
             className={styles.contactInfo}
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.7 }}
+            variants={contactInfoVariants}
+            initial="initial"
+            animate="animate"
           >
             <div className={styles.contactItem}>
               <FaPhone className={styles.contactIcon} />
@@ -238,6 +262,8 @@ const Header: React.FC = () => {
           <motion.nav 
             className={styles.nav}
             variants={navVariants}
+            initial="initial"
+            animate="animate"
           >
             {navItems.map((item) => {
               const IconComponent = item.icon;
@@ -274,9 +300,9 @@ const Header: React.FC = () => {
           {/* CTA Button - Ahora abre el modal */}
           <motion.div 
             className={styles.ctaSection}
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.9 }}
+            variants={ctaSectionVariants}
+            initial="initial"
+            animate="animate"
           >
             <button 
               onClick={openCotizationModal}
@@ -292,9 +318,9 @@ const Header: React.FC = () => {
             className={styles.mobileMenuButton}
             onClick={toggleMenu}
             whileTap={{ scale: 0.9 }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 1 }}
+            variants={mobileMenuButtonVariants}
+            initial="initial"
+            animate="animate"
           >
             <AnimatePresence mode="wait">
               <motion.div
@@ -308,7 +334,7 @@ const Header: React.FC = () => {
               </motion.div>
             </AnimatePresence>
           </motion.button>
-        </div>
+        </motion.div>
 
         {/* Mobile Menu */}
         <AnimatePresence>
@@ -389,7 +415,7 @@ const Header: React.FC = () => {
             </motion.div>
           )}
         </AnimatePresence>
-      </motion.header>
+      </header>
 
       {/* Modal de Cotización */}
       <AnimatePresence>
