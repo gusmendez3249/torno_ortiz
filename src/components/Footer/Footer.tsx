@@ -87,21 +87,23 @@ function Footer() {
         </div>
       )}
 
-      <motion.footer 
-        className={styles.footer}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.3 }}
-        variants={containerVariants}
-      >
-        {/* Efectos de fondo */}
+      {/* Footer SIN animación inicial - permanece estático */}
+      <footer className={styles.footer}>
+        {/* Efectos de fondo - siempre visibles */}
         <div className={styles.backgroundEffects}>
           <div className={styles.gradientOrb1}></div>
           <div className={styles.gradientOrb2}></div>
           <div className={styles.gradientOrb3}></div>
         </div>
 
-        <div className={styles.footerContainer}>
+        {/* Solo el contenido del footer tiene animaciones */}
+        <motion.div 
+          className={styles.footerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={containerVariants}
+        >
           <div className={styles.footerContent}>
             {/* Logo Section */}
             <motion.div 
@@ -318,8 +320,8 @@ function Footer() {
               </motion.div>
             </div>
           </motion.div>
-        </div>
-      </motion.footer>
+        </motion.div>
+      </footer>
     </>
   );
 }
