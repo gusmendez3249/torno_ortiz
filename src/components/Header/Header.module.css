@@ -476,7 +476,7 @@
 @media (max-width: 768px) {
   .header {
     /* Aumentar la altura mínima en móviles */
-    min-height: 80px;
+    min-height: 100px;
     /* Asegurar que no haya espacios */
     margin: 0;
     padding: 0;
