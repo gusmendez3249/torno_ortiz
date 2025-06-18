@@ -1,4 +1,4 @@
-/* Header.module.css - Estilos para el Header existente */
+/* Header.module.css - Estilos para el Header con fix móvil */
 
 /* ===== VARIABLES Y BASE ===== */
 .header {
@@ -15,6 +15,8 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   padding: 0;
   margin: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .header.scrolled {
@@ -81,6 +83,7 @@
   position: relative;
   z-index: 2;
   box-sizing: border-box;
+  width: 100%;
 }
 
 /* ===== LOGO SECTION ===== */
@@ -442,7 +445,7 @@
   box-shadow: 0 6px 20px rgba(34, 197, 94, 0.4);
 }
 
-/* ===== RESPONSIVE DESIGN ===== */
+/* ===== RESPONSIVE DESIGN - FIX MÓVIL ===== */
 @media (max-width: 1200px) {
   .headerContainer {
     grid-template-columns: auto 1fr auto auto;
@@ -469,11 +472,28 @@
   }
 }
 
+/* ===== FIX PRINCIPAL PARA MÓVILES ===== */
 @media (max-width: 768px) {
+  .header {
+    /* Aumentar la altura mínima en móviles */
+    min-height: 80px;
+    /* Asegurar que no haya espacios */
+    margin: 0;
+    padding: 0;
+    border: none;
+    /* Eliminar cualquier espacio blanco */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
   .headerContainer {
     grid-template-columns: auto 1fr auto;
-    height: 70px;
+    height: 75px; /* Altura aumentada */
     gap: 1rem;
+    padding: 0 1.5rem; /* Padding aumentado */
+    min-height: 75px;
+    /* Asegurar alineación vertical perfecta */
+    align-items: center;
+    justify-items: stretch;
   }
 
   .nav,
@@ -485,20 +505,24 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    /* Aumentar tamaño del botón */
+    padding: 14px;
+    min-width: 48px;
+    min-height: 48px;
   }
 
   .logoIcon {
-    width: 40px;
-    height: 40px;
-    font-size: 1.2rem;
-  }
-
-  .logoMain {
+    width: 42px;
+    height: 42px;
     font-size: 1.3rem;
   }
 
+  .logoMain {
+    font-size: 1.35rem;
+  }
+
   .logoSub {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
   }
 
   .mobileMenuContent {
@@ -506,24 +530,42 @@
   }
 }
 
+/* ===== FIX ESPECÍFICO PARA MÓVILES PEQUEÑOS ===== */
 @media (max-width: 480px) {
+  .header {
+    /* Mayor altura en dispositivos muy pequeños */
+    min-height: 70px;
+  }
+
   .headerContainer {
     padding: 0 1rem;
-    height: 65px;
+    height: 70px;
+    min-height: 70px;
+    /* Forzar centrado perfecto */
+    display: grid;
+    align-items: center;
+    justify-items: stretch;
   }
 
   .logoIcon {
-    width: 35px;
-    height: 35px;
-    font-size: 1rem;
-  }
-
-  .logoMain {
+    width: 38px;
+    height: 38px;
     font-size: 1.1rem;
   }
 
+  .logoMain {
+    font-size: 1.2rem;
+  }
+
   .logoSub {
-    font-size: 0.7rem;
+    font-size: 0.75rem;
+  }
+
+  .mobileMenuButton {
+    padding: 12px;
+    min-width: 44px;
+    min-height: 44px;
+    font-size: 1.1rem;
   }
 
   .mobileMenuContent {
@@ -541,51 +583,69 @@
   }
 }
 
-/* ===== ACCESIBILIDAD ===== */
-@media (prefers-reduced-motion: reduce) {
-  .logoIcon,
-  .gradientOrb1,
-  .gradientOrb2 {
-    animation: none;
+/* ===== FIX PARA VIEWPORT MÓVIL ===== */
+@media (max-width: 768px) {
+  /* Asegurar que el header ocupe todo el ancho */
+  .header {
+    left: 0;
+    right: 0;
+    width: 100vw;
+    max-width: 100vw;
+    box-sizing: border-box;
   }
-  
-  .navLink,
-  .ctaButton,
-  .mobileMenuButton,
-  .mobileNavLink,
-  .mobileCtaButton {
-    transition: none;
+
+  .headerContainer {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
-  
-  .logoLink:hover,
-  .navLink:hover,
-  .ctaButton:hover,
-  .mobileNavLink:hover {
-    transform: none;
+
+  /* Eliminar cualquier margin o padding que cause espacios */
+  .logoSection,
+  .mobileMenuButton {
+    margin: 0;
+    padding: 0;
+  }
+
+  .logoLink {
+    margin: 0;
+    padding: 0;
   }
 }
 
-/* ===== ESTADOS DE FOCUS ===== */
-.navLink:focus,
-.ctaButton:focus,
-.mobileMenuButton:focus,
-.mobileNavLink:focus,
-.mobileCtaButton:focus {
-  outline: 2px solid #3b82f6;
-  outline-offset: 2px;
-}
+/* ===== FIX PARA PANTALLAS MUY PEQUEÑAS ===== */
+@media (max-width: 360px) {
+  .header {
+    min-height: 65px;
+  }
 
-/* ===== UTILIDADES ===== */
-.srOnly {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
+  .headerContainer {
+    height: 65px;
+    min-height: 65px;
+    padding: 0 0.8rem;
+    gap: 0.8rem;
+  }
+
+  .logoIcon {
+    width: 35px;
+    height: 35px;
+    font-size: 1rem;
+  }
+
+  .logoMain {
+    font-size: 1.1rem;
+  }
+
+  .logoSub {
+    font-size: 0.7rem;
+  }
+
+  .mobileMenuButton {
+    padding: 10px;
+    min-width: 40px;
+    min-height: 40px;
+    font-size: 1rem;
+  }
 }
 
 /* ===== MODAL DE COTIZACIÓN EN HEADER - SOLO ESTRUCTURA ===== */
@@ -632,13 +692,13 @@
   transition: all 0.3s ease;
   z-index: 10001;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  background: rgba(255, 255, 255, 0.9); /* Fondo blanco */
-  color: #dc2626; /* Color rojo para la X */
+  background: rgba(255, 255, 255, 0.9);
+  color: #dc2626;
 }
 
 .modalCloseButton:hover {
   transform: scale(1.1);
-  background: #dc2626; /* Fondo rojo al hacer hover */
+  background: #dc2626;
   color: #ffffff; 
 }
 
@@ -650,7 +710,6 @@
   margin: 0 !important;
 }
 
-/* Espaciado específico para modal de header */
 .modalContent .formTitle {
   margin-top: 0.5rem !important;
   margin-bottom: 1.5rem !important;
@@ -805,16 +864,51 @@
 
 /* ===== ACCESIBILIDAD ===== */
 @media (prefers-reduced-motion: reduce) {
-  .modalContent,
-  .modalCloseButton,
+  .logoIcon,
+  .gradientOrb1,
+  .gradientOrb2 {
+    animation: none;
+  }
+  
+  .navLink,
   .ctaButton,
-  .mobileCtaButton {
+  .mobileMenuButton,
+  .mobileNavLink,
+  .mobileCtaButton,
+  .modalContent,
+  .modalCloseButton {
     transition: none !important;
   }
   
-  .modalCloseButton:hover,
+  .logoLink:hover,
+  .navLink:hover,
   .ctaButton:hover,
+  .mobileNavLink:hover,
+  .modalCloseButton:hover,
   .mobileCtaButton:hover {
     transform: none !important;
   }
+}
+
+/* ===== ESTADOS DE FOCUS ===== */
+.navLink:focus,
+.ctaButton:focus,
+.mobileMenuButton:focus,
+.mobileNavLink:focus,
+.mobileCtaButton:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* ===== UTILIDADES ===== */
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }

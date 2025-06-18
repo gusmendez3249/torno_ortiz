@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { 
   FaHome, 
@@ -15,6 +15,31 @@ import UbicacionEmbed from '../Ubicacion/Ubicacion';
 
 function Footer() {
   const [mostrarMapa, setMostrarMapa] = useState(false);
+
+  // Cerrar modal con ESC
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && mostrarMapa) {
+        setMostrarMapa(false);
+      }
+    };
+
+    window.addEventListener('keydown', handleEscape);
+    return () => window.removeEventListener('keydown', handleEscape);
+  }, [mostrarMapa]);
+
+  // Prevenir scroll del body cuando el modal está abierto
+  useEffect(() => {
+    if (mostrarMapa) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [mostrarMapa]);
 
   const containerVariants = {
     hidden: { opacity: 0, y: 50 },
@@ -46,12 +71,17 @@ function Footer() {
 
   return (
     <>
-      {/* Componente de Ubicación (cuando está activo) */}
+      {/* PANTALLA FLOTANTE DE UBICACIÓN */}
       {mostrarMapa && (
-        <UbicacionEmbed 
-          onClose={() => setMostrarMapa(false)} 
-          className="mb-8" 
-        />
+        <div className={styles.modalOverlay}>
+          <div className={styles.modalBackdrop} onClick={() => setMostrarMapa(false)} />
+          <div className={styles.modalContainer}>
+            <UbicacionEmbed 
+              onClose={() => setMostrarMapa(false)} 
+              className={styles.modalUbicacion}
+            />
+          </div>
+        </div>
       )}
 
       <motion.footer 
@@ -175,32 +205,26 @@ function Footer() {
                   Contacto
                 </h3>
                 <div className={styles.contactInfo}>
-                  {/* Dirección - Clickeable para mostrar mapa */}
+                  {/* Dirección - Clickeable para mostrar modal flotante */}
                   <motion.div 
-                    className={styles.contactItem}
+                    className={`${styles.contactItem} ${styles.contactItemClickable}`}
                     whileHover={{ scale: 1.02 }}
                     onClick={() => setMostrarMapa(true)}
-                    style={{ cursor: "pointer" }}
                   >
                     <motion.div 
                       className={styles.contactIconWrapper}
                       whileHover={{ rotate: 5 }}
                     >
-                      <FaMapMarkerAlt />
+                      <FaMapMarkerAlt className={styles.locationIcon} />
                     </motion.div>
                     <div className={styles.contactText}>
                       <span>Calle Rey Alfonso XIII #191</span>
                       <span>Col. Los Reyes C.P. 36570</span>
                       <span>Irapuato, Guanajuato</span>
-                      <small style={{ 
-                        color: '#007bff', 
-                        fontStyle: 'italic',
-                        fontSize: '0.75rem',
-                        marginTop: '2px',
-                        display: 'block'
-                      }}>
-                        Click para ver el mapa
-                      </small>
+                      <div className={styles.clickIndicator}>
+                        <span className={styles.clickText}>🗺️ Click para ver el mapa</span>
+                        <div className={styles.clickAnimation}></div>
+                      </div>
                     </div>
                   </motion.div>
 
