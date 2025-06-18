@@ -1,4 +1,4 @@
-/* Header.module.css - Estilos para el Header con fix móvil */
+/* Header.module.css - Estilos para el Header con fix móvil CORREGIDO */
 
 /* ===== VARIABLES Y BASE ===== */
 .header {
@@ -472,28 +472,40 @@
   }
 }
 
-/* ===== FIX PRINCIPAL PARA MÓVILES ===== */
+/* ===== FIX CRÍTICO PARA MÓVILES - ELIMINAR ESPACIO BLANCO ===== */
 @media (max-width: 768px) {
   .header {
-    /* Aumentar la altura mínima en móviles */
-    min-height: 100px;
-    /* Asegurar que no haya espacios */
+    min-height: 70px;
+    height: 70px;
+    max-height: 70px;
     margin: 0;
     padding: 0;
     border: none;
-    /* Eliminar cualquier espacio blanco */
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    /* CRÍTICO: Fuerza el header a ocupar exactamente el espacio necesario */
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100vw;
+    max-width: 100vw;
+    box-sizing: border-box;
   }
 
   .headerContainer {
     grid-template-columns: auto 1fr auto;
-    height: 75px; /* Altura aumentada */
+    height: 70px;
+    min-height: 70px;
+    max-height: 70px;
     gap: 1rem;
-    padding: 0 1.5rem; /* Padding aumentado */
-    min-height: 75px;
-    /* Asegurar alineación vertical perfecta */
+    padding: 0 1rem;
     align-items: center;
     justify-items: stretch;
+    display: grid;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0;
   }
 
   .nav,
@@ -505,51 +517,65 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    /* Aumentar tamaño del botón */
-    padding: 14px;
-    min-width: 48px;
-    min-height: 48px;
+    padding: 12px;
+    min-width: 44px;
+    min-height: 44px;
+    flex-shrink: 0;
   }
 
   .logoIcon {
-    width: 42px;
-    height: 42px;
-    font-size: 1.3rem;
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+    flex-shrink: 0;
   }
 
   .logoMain {
-    font-size: 1.35rem;
+    font-size: 1.3rem;
   }
 
   .logoSub {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
   }
 
   .mobileMenuContent {
-    padding: 1.5rem;
+    padding: 1.5rem 1rem;
+  }
+
+  /* CRÍTICO: Eliminar cualquier gap o spacing innecesario */
+  .logoSection {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+  }
+
+  .logoLink {
+    margin: 0;
+    padding: 0;
+    gap: 12px;
   }
 }
 
-/* ===== FIX ESPECÍFICO PARA MÓVILES PEQUEÑOS ===== */
+/* ===== FIX ESPECÍFICO PARA MÓVILES MUY PEQUEÑOS ===== */
 @media (max-width: 480px) {
   .header {
-    /* Mayor altura en dispositivos muy pequeños */
-    min-height: 70px;
+    min-height: 65px;
+    height: 65px;
+    max-height: 65px;
   }
 
   .headerContainer {
-    padding: 0 1rem;
-    height: 70px;
-    min-height: 70px;
-    /* Forzar centrado perfecto */
-    display: grid;
-    align-items: center;
-    justify-items: stretch;
+    padding: 0 0.8rem;
+    height: 65px;
+    min-height: 65px;
+    max-height: 65px;
+    gap: 0.8rem;
   }
 
   .logoIcon {
-    width: 38px;
-    height: 38px;
+    width: 36px;
+    height: 36px;
     font-size: 1.1rem;
   }
 
@@ -558,18 +584,18 @@
   }
 
   .logoSub {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
   }
 
   .mobileMenuButton {
-    padding: 12px;
-    min-width: 44px;
-    min-height: 44px;
+    padding: 10px;
+    min-width: 40px;
+    min-height: 40px;
     font-size: 1.1rem;
   }
 
   .mobileMenuContent {
-    padding: 1rem;
+    padding: 1rem 0.8rem;
   }
 
   .mobileNavLink {
@@ -583,52 +609,25 @@
   }
 }
 
-/* ===== FIX PARA VIEWPORT MÓVIL ===== */
-@media (max-width: 768px) {
-  /* Asegurar que el header ocupe todo el ancho */
-  .header {
-    left: 0;
-    right: 0;
-    width: 100vw;
-    max-width: 100vw;
-    box-sizing: border-box;
-  }
-
-  .headerContainer {
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
-  }
-
-  /* Eliminar cualquier margin o padding que cause espacios */
-  .logoSection,
-  .mobileMenuButton {
-    margin: 0;
-    padding: 0;
-  }
-
-  .logoLink {
-    margin: 0;
-    padding: 0;
-  }
-}
-
 /* ===== FIX PARA PANTALLAS MUY PEQUEÑAS ===== */
 @media (max-width: 360px) {
   .header {
-    min-height: 65px;
+    min-height: 60px;
+    height: 60px;
+    max-height: 60px;
   }
 
   .headerContainer {
-    height: 65px;
-    min-height: 65px;
-    padding: 0 0.8rem;
-    gap: 0.8rem;
+    height: 60px;
+    min-height: 60px;
+    max-height: 60px;
+    padding: 0 0.6rem;
+    gap: 0.6rem;
   }
 
   .logoIcon {
-    width: 35px;
-    height: 35px;
+    width: 32px;
+    height: 32px;
     font-size: 1rem;
   }
 
@@ -637,14 +636,78 @@
   }
 
   .logoSub {
-    font-size: 0.7rem;
+    font-size: 0.65rem;
   }
 
   .mobileMenuButton {
-    padding: 10px;
-    min-width: 40px;
-    min-height: 40px;
+    padding: 8px;
+    min-width: 36px;
+    min-height: 36px;
     font-size: 1rem;
+  }
+}
+
+/* ===== CLASES UTILITARIAS PARA EL CONTENIDO PRINCIPAL ===== */
+/* Aplica estas clases al contenido que viene después del header */
+.pageContentWithHeader {
+  padding-top: 80px; /* Desktop */
+}
+
+@media (max-width: 768px) {
+  .pageContentWithHeader {
+    padding-top: 70px !important; /* Móvil tablet */
+  }
+}
+
+@media (max-width: 480px) {
+  .pageContentWithHeader {
+    padding-top: 65px !important; /* Móvil pequeño */
+  }
+}
+
+@media (max-width: 360px) {
+  .pageContentWithHeader {
+    padding-top: 60px !important; /* Móvil muy pequeño */
+  }
+}
+
+/* ===== ALTERNATIVA: CLASES GLOBALES ===== */
+/* Si prefieres usar clases globales en lugar de módulos */
+:global(.main-content),
+:global(.page-content),
+:global(.content-wrapper),
+:global(.hero-section),
+:global(.section-with-header) {
+  padding-top: 80px;
+}
+
+@media (max-width: 768px) {
+  :global(.main-content),
+  :global(.page-content),
+  :global(.content-wrapper),
+  :global(.hero-section),
+  :global(.section-with-header) {
+    padding-top: 70px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  :global(.main-content),
+  :global(.page-content),
+  :global(.content-wrapper),
+  :global(.hero-section),
+  :global(.section-with-header) {
+    padding-top: 65px !important;
+  }
+}
+
+@media (max-width: 360px) {
+  :global(.main-content),
+  :global(.page-content),
+  :global(.content-wrapper),
+  :global(.hero-section),
+  :global(.section-with-header) {
+    padding-top: 60px !important;
   }
 }
 
